@@ -52,4 +52,5 @@ export interface IMealItem {
 
 export interface IMealItemForm {
   id: string;
+  onAddToCart: (amount: number) => void;
 }
