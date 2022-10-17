@@ -18,6 +18,31 @@ export interface IInput {
   input: IInputProps;
 }
 
+export interface IModal {
+  children: ReactNode;
+  onClose: () => void;
+}
+
+export interface IModalOverlay {
+  children: ReactNode;
+}
+
+export interface IBackdrop {
+  onClose: () => void;
+}
+
+export interface IHeader {
+  onShowCart: () => void;
+}
+
+export interface IHeaderCartButton {
+  onClick?: () => void;
+}
+
+export interface ICart {
+  onClose: () => void;
+}
+
 export interface IMealItem {
   id: string;
   name: string;
