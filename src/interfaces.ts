@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
 
-import { ICartItem as IContextCartItem } from './store/cart-context';
-
 interface IInputProps {
   id: string;
   type: 'text' | 'number' | 'url' | 'tel';
@@ -49,8 +47,8 @@ export interface ICartItem {
   name: string;
   amount: number;
   price: number;
-  onAdd: (item: IContextCartItem) => void;
-  onRemove: (id: string) => void;
+  onAdd: () => void;
+  onRemove: () => void;
 }
 
 export interface IMealItem {

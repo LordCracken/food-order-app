@@ -10,12 +10,16 @@ import classes from './Cart.module.css';
 const Cart = ({ onClose }: ICart) => {
   const cartCtx = useContext(CartContext);
 
-  const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
+  const totalAmount = `$${Math.abs(+cartCtx.totalAmount).toFixed(2)}`;
   const hasItems = cartCtx.items.length > 0;
 
-  const cartItemAddHandler = (item: ICartItem) => {};
+  const cartItemAddHandler = (item: ICartItem) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
 
-  const cartItemRemoveHandler = (id: string) => {};
+  const cartItemRemoveHandler = (id: string) => {
+    cartCtx.removeItem(id);
+  };
 
   const cartItems = (
     <ul className={classes['cart-items']}>
