@@ -22,8 +22,25 @@ const initialState: ICartState = {
 
 const cartReducer = (state: ICartState, action: ICartAction<string | ICartItem>): ICartState => {
   if (action.type === CartActions.add && typeof action.payload !== 'string') {
-    const updatedItems = state.items.concat(action.payload!);
     const updatedTotalAmount = state.totalAmount + action.payload!.price * action.payload!.amount;
+
+    const existingItemIndex = state.items.findIndex(
+      (item) => typeof action.payload !== 'string' && item.id === action.payload!.id,
+    );
+    const existingItem = state.items[existingItemIndex];
+    let updatedItems;
+
+    if (existingItem) {
+      const updatedItem = {
+        ...existingItem,
+        amount: existingItem.amount + action.payload!.amount
+      };
+      updatedItems = [...state.items];
+      updatedItems[existingItemIndex] = updatedItem;
+    } else {
+      updatedItems = state.items.concat(action.payload!);
+    }
+
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
 
