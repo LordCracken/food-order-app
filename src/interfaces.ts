@@ -51,7 +51,15 @@ export interface ICartItem {
   onRemove: () => void;
 }
 
+export interface IUserData {
+  name: string;
+  street: string;
+  postalCode: string;
+  city: string;
+}
+
 export interface ICheckout {
+  onConfirm: (userData: IUserData) => void;
   onCancel: () => void;
 }
 

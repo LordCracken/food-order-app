@@ -6,7 +6,7 @@ import classes from './Checkout.module.css';
 const isEmpty = (value: string) => value.trim() === '';
 const isPostal = (value: string) => value.length === 5;
 
-const Checkout = ({ onCancel }: ICheckout) => {
+const Checkout = ({ onConfirm, onCancel }: ICheckout) => {
   const [formInputsValidity, setFormInputsValidity] = useState({
     name: true,
     street: true,
@@ -44,6 +44,13 @@ const Checkout = ({ onCancel }: ICheckout) => {
     if (!formIsValid) {
       return;
     }
+
+    onConfirm({
+      name: enteredName,
+      street: enteredStreet,
+      postalCode: enteredPostal,
+      city: enteredCity,
+    });
   };
 
   const nameControlClasses = `${classes.control} ${!formInputsValidity.name && classes.invalid}`;
@@ -70,7 +77,9 @@ const Checkout = ({ onCancel }: ICheckout) => {
       <div className={postalControlClasses}>
         <label htmlFor="postal">Postal Code</label>
         <input type="text" id="postal" ref={postalInputRef} />
-        {!formInputsValidity.postalCode && <p>Please enter a valid postal code (5 characters long)!</p>}
+        {!formInputsValidity.postalCode && (
+          <p>Please enter a valid postal code (5 characters long)!</p>
+        )}
       </div>
       <div className={cityControlClasses}>
         <label htmlFor="city">City</label>

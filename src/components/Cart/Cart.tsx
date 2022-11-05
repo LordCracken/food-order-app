@@ -5,7 +5,7 @@ import Modal from '../UI/Modal';
 import CartItem from './CartItem';
 import Checkout from './Checkout';
 
-import { ICart } from '../../interfaces';
+import { ICart, IUserData } from '../../interfaces';
 import classes from './Cart.module.css';
 
 const Cart = ({ onClose }: ICart) => {
@@ -26,6 +26,14 @@ const Cart = ({ onClose }: ICart) => {
 
   const orderHandler = () => {
     setIsCheckout(true);
+  };
+
+  const submitOrderHandler = (userData: IUserData) => {
+    const url = 'https://reactmeals-6aaed-default-rtdb.firebaseio.com/orders.json';
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ user: userData, orderedItems: cartCtx.items }),
+    });
   };
 
   const cartItems = (
@@ -63,7 +71,7 @@ const Cart = ({ onClose }: ICart) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {isCheckout && <Checkout onCancel={onClose} />}
+      {isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={onClose} />}
       {!isCheckout && modalActions}
     </Modal>
   );
