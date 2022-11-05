@@ -51,6 +51,10 @@ export interface ICartItem {
   onRemove: () => void;
 }
 
+export interface ICheckout {
+  onCancel: () => void;
+}
+
 export interface IMealItem {
   id: string;
   name: string;
