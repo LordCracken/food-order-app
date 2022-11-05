@@ -6,7 +6,7 @@ import MealItem from './MealItem/MealItem';
 import classes from './AvailableMeals.module.css';
 
 const AvailableMeals = () => {
-  const mealsList = DUMMY_MEALS.map((meal) => (
+  const mealsList = DUMMY_MEALS.map(meal => (
     <MealItem
       key={meal.id}
       id={meal.id}

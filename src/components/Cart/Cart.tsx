@@ -23,7 +23,7 @@ const Cart = ({ onClose }: ICart) => {
 
   const cartItems = (
     <ul className={classes['cart-items']}>
-      {cartCtx.items.map((item) => (
+      {cartCtx.items.map(item => (
         <CartItem
           key={item.id}
           name={item.name}

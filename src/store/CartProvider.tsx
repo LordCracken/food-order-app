@@ -25,7 +25,7 @@ const cartReducer = (state: ICartState, action: ICartAction<string | ICartItem>)
     const updatedTotalAmount = state.totalAmount + action.payload!.price * action.payload!.amount;
 
     const existingItemIndex = state.items.findIndex(
-      (item) => typeof action.payload !== 'string' && item.id === action.payload!.id,
+      item => typeof action.payload !== 'string' && item.id === action.payload!.id,
     );
     const existingItem = state.items[existingItemIndex];
     let updatedItems;
@@ -45,13 +45,13 @@ const cartReducer = (state: ICartState, action: ICartAction<string | ICartItem>)
   }
 
   if (action.type === CartActions.remove) {
-    const existingItemIndex = state.items.findIndex((item) => item.id === action.payload);
+    const existingItemIndex = state.items.findIndex(item => item.id === action.payload);
     const existingItem = state.items[existingItemIndex];
     const updatedTotalAmount = state.totalAmount - existingItem.price;
     let updatedItems;
 
     if (existingItem.amount === 1) {
-      updatedItems = state.items.filter((item) => item.id !== action.payload);
+      updatedItems = state.items.filter(item => item.id !== action.payload);
     } else {
       const updatedItem = { ...existingItem, amount: existingItem.amount - 1 };
       updatedItems = [...state.items];
