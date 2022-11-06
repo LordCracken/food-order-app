@@ -8,6 +8,7 @@ interface ICartProvider {
 enum CartActions {
   add = 'ADD',
   remove = 'REMOVE',
+  clear = 'CLEAR',
 }
 
 interface ICartAction<T> {
@@ -61,6 +62,8 @@ const cartReducer = (state: ICartState, action: ICartAction<string | ICartItem>)
     return { items: updatedItems, totalAmount: updatedTotalAmount };
   }
 
+  if (action.type === CartActions.clear) return initialState;
+
   return initialState;
 };
 
@@ -75,11 +78,16 @@ const CartProvider: FC<ICartProvider> = ({ children }) => {
     dispatchCartAction({ type: CartActions.remove, payload: id });
   };
 
+  const clearCartHandler = () => {
+    dispatchCartAction({ type: CartActions.clear });
+  };
+
   const cartContext = {
     items: cartState.items,
     totalAmount: cartState.totalAmount,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    clearCart: clearCartHandler,
   };
 
   return <CartContext.Provider value={cartContext}>{children}</CartContext.Provider>;

@@ -38,6 +38,7 @@ const Cart = ({ onClose }: ICart) => {
     });
     setIsSubmitting(false);
     setDidSubmit(true);
+    cartCtx.clearCart();
   };
 
   const cartItems = (

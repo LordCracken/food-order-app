@@ -15,6 +15,7 @@ export interface ICartItem {
 interface ICartContext extends ICartState {
   addItem: (item: ICartItem) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<ICartContext>({
@@ -22,6 +23,7 @@ const CartContext = createContext<ICartContext>({
   totalAmount: 0,
   addItem: () => null,
   removeItem: () => null,
+  clearCart: () => null,
 });
 
 export default CartContext;
